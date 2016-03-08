@@ -1,0 +1,31 @@
+<html data-ng-app="myContacts">
+    <head>
+        <meta charset="UTF-8">
+        <title>Angular Contacts</title>
+        <script src="assets/js/jquery-2.2.1.js"></script>
+        <script src="assets/js/bootstrap.js"></script>
+        <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+        <!--<script src = "angularjs/angular-route.min.js"></script>    -->
+        <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+        <script src = "app.js"></script>
+        <script src = "factories/myFactories.js"></script> 
+        <script src = "controllers/myControllers.js"></script>
+        <script src = "myDirectives.js"></script>
+        
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" href="style.css">
+        
+    </head>
+    <body>
+      
+        
+        <div class="container">
+            <div class="jumbotron">
+                <h1>AngularJS Contacts</h1>
+                <small>Demo using bootstrap for the styling and AngularJS for controlling the data</small>
+            </div>
+            <div data-ng-view></div>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,30 @@
+<h1>CONTACTS</h1>
+
+                    
+<div class="row">
+    <div class="col-lg-10 col-xs-10"><input placeholder="Seach Your Contacts" class="form-control" type="text" data-ng-model="searchText"></div>
+    <div class="col-lg-2 col-xs-2">
+        <a class="btn btn-success btn-circle btn-lg" role="button" href="#addcontact"><span class="glyphicon glyphicon-plus"></span></a>
+    </div>
+</div>
+
+<div class="row">
+    <div data-ng-repeat="contact in contacts | orderBy: 'name'| filter: searchText" class="clearfix" id="contact">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xm-12">
+            <img height="150" width="150" src="{{contact.image}}"/>
+        </div>
+        <div class="col-lg-8 col-md-6 col-sm-6 col-xm-12">
+
+            <h2>{{ contact.name }} <br/><small>{{ contact.number }}</small></h2>
+                       <div id="controlButtons" class="col-lg-12 com-md-12 col-sm-12 col-xm-12">
+             <a role="button" class="btn-info btn-lg" href="#contact-info/{{contact.id}}"><span class="glyphicon glyphicon-ok"></span></a>
+            <a href="#editcontact/{{ contact.id }}" role="button" class="btn-default btn-lg"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a ng-click="deleteContact(contact.id)" role="button" class="btn-danger btn-lg"><span class="glyphicon glyphicon-trash"></span></a>
+        </div>        
+            
+        </div>
+
+        
+    </div>
+</div>
+

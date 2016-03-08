@@ -1,0 +1,49 @@
+<h1>EDIT CONTACT</h1>
+<div class="row">
+    <div class="col-lg-3">
+        <b>Current Name:</b> {{currentContact.name}} 
+    </div>    
+    <div class="col-lg-4">
+        <b>Change Name:</b> <input placeholder="New Phone Number" type="text" data-ng-model="editContact.xname">
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-3">
+        <b>Current Number:</b> {{currentContact.number}}
+    </div>    
+    <div class="col-lg-4">
+        <b>Change Number:</b> <input placeholder="New Phone Number" type="text" data-ng-model="editContact.number">
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-3">
+        <b>Current E-mail:</b> {{currentContact.mail}}
+    </div>    
+    <div class="col-lg-4">
+        <b>Change E-mail:</b> <input placeholder="New e-mail address" type="text" data-ng-model="editContact.mail">
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-3">
+        <b>Current Job:</b> {{currentContact.job}}
+    </div>    
+    <div class="col-lg-4">
+        <b>Change Job:</b> <input placeholder="New Job" type="text" data-ng-model="editContact.job">
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-2 col-xs-6">
+        <button class="btn btn-success btn-lg" ng-click="editContact()"><span class="glyphicon glyphicon-ok"></span> Accept</button>
+    </div>    
+    <div class="col-lg-2 col-xs-6">
+        <button class="btn btn-danger btn-lg" ng-click="deleteContact()"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+    </div>
+    <div class="col-lg-2 col-xs-12">
+        <button class="btn btn-primary-outline btn-lg" ng-click="back()"><span class="glyphicon glyphicon-repeat"></span> Back</button>
+    </div>
+</div>
+
