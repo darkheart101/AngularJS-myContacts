@@ -1,36 +1,47 @@
+
 myContacts.controller('myController', function ($scope, $routeParams, $location, Contacts){
     $scope.contacts = Contacts.getContacts();
          
     $scope.addContact = function(){
+        var emailPatt = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         
         try{
             if(typeof $scope.newContact.name === 'undefined' || typeof $scope.newContact.number === 'undefined'){
                 $('#newName').html("<small>You must fill the name field</small>");
                 $('#newNumber').html("<small>You must fill the number field</small>");
+                $('#newEmail').html("<small>You must fill the email ex. xxx@xx.xx</small>");
             }
             else{
-                if($scope.newContact.number && !isNaN($scope.newContact.number)){
-                    var newID = $scope.contacts.length;
-                    var addContactList = {
-                        id: newID,
-                        name: $scope.newContact.name,
-                        number: $scope.newContact.number,
-                        image: $scope.newContact.image,
-                        mail: $scope.newContact.mail,
-                        job: $scope.newContact.job
-                    }
+                if($scope.newContact.mail && emailPatt.test($scope.newContact.mail)){
+                    if($scope.newContact.number && !isNaN($scope.newContact.number)){
+                        var newID = $scope.contacts.length;
+                        var addContactList = {
+                            id: newID,
+                            name: $scope.newContact.name,
+                            number: $scope.newContact.number,
+                            image: $scope.newContact.image,
+                            mail: $scope.newContact.mail,
+                            job: $scope.newContact.job
+                        } 
+                    
+                        if(!$scope.newContact.image){
+                            addContactList['image']= 'assets/images/nopicture.jpg';
+                        }
+                        $scope.contacts.push(addContactList);
+                        $location.path("/home");    
+                    } 
+                }else{
+                    $('#newName').html("<small>You must fill the name field</small>");
+                    $('#newNumber').html("<small>You must fill the number field</small>");
+                    $('#newEmail').html("<small>You must fill the email ex. xxx@xx.xx</small>");    
+                }
                 
-                    if(!$scope.newContact.image){
-                        addContactList['image']= 'assets/images/nopicture.jpg';
-                    }
-                    $scope.contacts.push(addContactList);
-                    $location.path("/home");    
-                }    
             }
         }catch(err) {
             console.log(err);
             $('#newName').html("<small>You must fill the name field</small>");
             $('#newNumber').html("<small>You must fill the number field</small>");
+            $('#newEmail').html("<small>You must fill the email ex. xxx@xx.xx</small>");
         }
     };
     
@@ -65,14 +76,12 @@ myContacts.controller('contactEditController',  function ($scope, $routeParams, 
     $scope.contacts = Contacts.getContacts(); 
     $scope.currentContact = $scope.contacts[index];
     
+    var emailPatt = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    
     $scope.editContact = function(){
         if($scope.editContact.xname){
             $scope.contacts[index].name = $scope.editContact.xname;
         }
-        if($scope.editContact.mail){
-            $scope.contacts[index].mail = $scope.editContact.mail;
-        }
-        
         if($scope.editContact.job){
             $scope.contacts[index].job = $scope.editContact.job;
         }
@@ -83,6 +92,9 @@ myContacts.controller('contactEditController',  function ($scope, $routeParams, 
             if(!isNaN($scope.editContact.number)){
                 $scope.contacts[index].number = $scope.editContact.number;
             }
+        }
+        if($scope.editContact.mail && emailPatt.test($scope.editContact.mail)){
+            $scope.contacts[index].mail = $scope.editContact.mail;
         }
         $location.path("/home");
     };
