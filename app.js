@@ -1,5 +1,6 @@
 var myContacts = angular.module('myContacts', ['ngRoute']); 
 
+/* Routing */
 myContacts.config(['$routeProvider', function($routeProvider) {
             $routeProvider.
             when('/home', {

@@ -1,3 +1,4 @@
+/* Adding the Contact list with dummy data */
 myContacts.factory('Contacts', function(){
     var factory = {};
     

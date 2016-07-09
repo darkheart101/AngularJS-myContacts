@@ -1,4 +1,3 @@
-
 myContacts.controller('myController', function ($scope, $routeParams, $location, Contacts){
     $scope.contacts = Contacts.getContacts();
          
@@ -10,30 +9,36 @@ myContacts.controller('myController', function ($scope, $routeParams, $location,
                 $('#newName').html("<small>You must fill the name field</small>");
                 $('#newNumber').html("<small>You must fill the number field</small>");
                 $('#newEmail').html("<small>You must fill the email ex. xxx@xx.xx</small>");
+                $('#styleJob').html("<small>s</small> ");
+                $('#styleJob').css('visibility','hidden');
             }
             else{
-                if($scope.newContact.mail && emailPatt.test($scope.newContact.mail)){
-                    if($scope.newContact.number && !isNaN($scope.newContact.number)){
-                        var newID = $scope.contacts.length;
-                        var addContactList = {
-                            id: newID,
-                            name: $scope.newContact.name,
-                            number: $scope.newContact.number,
-                            image: $scope.newContact.image,
-                            mail: $scope.newContact.mail,
-                            job: $scope.newContact.job
+                if($scope.newContact.name){
+                    if($scope.newContact.mail && emailPatt.test($scope.newContact.mail)){
+                        if($scope.newContact.number && !isNaN($scope.newContact.number)){
+                            var newID = $scope.contacts.length;
+                            var addContactList = {
+                                id: newID,
+                                name: $scope.newContact.name,
+                                number: $scope.newContact.number,
+                                image: $scope.newContact.image,
+                                mail: $scope.newContact.mail,
+                                job: $scope.newContact.job
+                            } 
+
+                            if(!$scope.newContact.image){
+                                addContactList['image']= 'assets/images/nopicture.jpg';
+                            }
+                            $scope.contacts.push(addContactList);
+                            $location.path("/home");    
                         } 
-                    
-                        if(!$scope.newContact.image){
-                            addContactList['image']= 'assets/images/nopicture.jpg';
-                        }
-                        $scope.contacts.push(addContactList);
-                        $location.path("/home");    
-                    } 
-                }else{
-                    $('#newName').html("<small>You must fill the name field</small>");
-                    $('#newNumber').html("<small>You must fill the number field</small>");
-                    $('#newEmail').html("<small>You must fill the email ex. xxx@xx.xx</small>");    
+                    }else{
+                        $('#newName').html("<small>You must fill the name field</small>");
+                        $('#newNumber').html("<small>You must fill the number field</small>");
+                        $('#newEmail').html("<small>You must fill the email ex. xxx@xx.xx</small>");
+                        $('#styleJob').html("<small>s</small> ");
+                        $('#styleJob').css('visibility','hidden');
+                    }
                 }
                 
             }
@@ -42,6 +47,8 @@ myContacts.controller('myController', function ($scope, $routeParams, $location,
             $('#newName').html("<small>You must fill the name field</small>");
             $('#newNumber').html("<small>You must fill the number field</small>");
             $('#newEmail').html("<small>You must fill the email ex. xxx@xx.xx</small>");
+            $('#styleJob').html("<small>s</small> ");
+            $('#styleJob').css('visibility','hidden');
         }
     };
     
@@ -60,6 +67,7 @@ myContacts.controller('myController', function ($scope, $routeParams, $location,
     };
 });
 
+/* Controller to view a single contact information */
 myContacts.controller('contactInfoController',  function ($scope, $routeParams, Contacts){
     var index = $routeParams.id;
     $scope.contacts = Contacts.getContacts(); 
@@ -71,6 +79,7 @@ myContacts.controller('contactInfoController',  function ($scope, $routeParams, 
 
 });
 
+/* Controller that edits a contact */
 myContacts.controller('contactEditController',  function ($scope, $routeParams, $location, Contacts){
     var index = $routeParams.editid;
     $scope.contacts = Contacts.getContacts(); 
