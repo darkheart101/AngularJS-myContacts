@@ -27,28 +27,6 @@ myContacts.controller('myController', function ($scope, $routeParams, $location,
                     $location.path("/home");    
                 }    
             }
-                
-                
-                
-                /*if($scope.newContact.name){
-                if($scope.newContact.number && !isNaN($scope.newContact.number)){
-                    var newID = $scope.contacts.length;
-                    var addContactList = {
-                        id: newID,
-                        name: $scope.newContact.name,
-                        number: $scope.newContact.number,
-                        image: $scope.newContact.image,
-                        mail: $scope.newContact.mail,
-                        job: $scope.newContact.job
-                    }
-                
-                if(!$scope.newContact.image){
-                    addContactList['image']= 'assets/images/nopicture.jpg';
-                }
-                $scope.contacts.push(addContactList);
-                $location.path("/home");    
-                }   
-            }*/
         }catch(err) {
             console.log(err);
             $('#newName').html("<small>You must fill the name field</small>");
