@@ -3,22 +3,57 @@ myContacts.controller('myController', function ($scope, $routeParams, $location,
          
     $scope.addContact = function(){
         
-        if($scope.newContact.name){
-            if($scope.newContact.number){
-                if(!isNaN($scope.newContact.number)){
+        try{
+            if(typeof $scope.newContact.name === 'undefined' || typeof $scope.newContact.number === 'undefined'){
+                $('#newName').html("<small>You must fill the name field</small>");
+                $('#newNumber').html("<small>You must fill the number field</small>");
+            }
+            else{
+                if($scope.newContact.number && !isNaN($scope.newContact.number)){
                     var newID = $scope.contacts.length;
-                    $scope.contacts.push({
+                    var addContactList = {
                         id: newID,
                         name: $scope.newContact.name,
                         number: $scope.newContact.number,
                         image: $scope.newContact.image,
                         mail: $scope.newContact.mail,
                         job: $scope.newContact.job
-                    });
+                    }
+                
+                    if(!$scope.newContact.image){
+                        addContactList['image']= 'assets/images/nopicture.jpg';
+                    }
+                    $scope.contacts.push(addContactList);
+                    $location.path("/home");    
+                }    
+            }
+                
+                
+                
+                /*if($scope.newContact.name){
+                if($scope.newContact.number && !isNaN($scope.newContact.number)){
+                    var newID = $scope.contacts.length;
+                    var addContactList = {
+                        id: newID,
+                        name: $scope.newContact.name,
+                        number: $scope.newContact.number,
+                        image: $scope.newContact.image,
+                        mail: $scope.newContact.mail,
+                        job: $scope.newContact.job
+                    }
+                
+                if(!$scope.newContact.image){
+                    addContactList['image']= 'assets/images/nopicture.jpg';
                 }
-            }   
+                $scope.contacts.push(addContactList);
+                $location.path("/home");    
+                }   
+            }*/
+        }catch(err) {
+            console.log(err);
+            $('#newName').html("<small>You must fill the name field</small>");
+            $('#newNumber').html("<small>You must fill the number field</small>");
         }
-        $location.path("/home");
     };
     
     $scope.back = function() { 
@@ -56,19 +91,20 @@ myContacts.controller('contactEditController',  function ($scope, $routeParams, 
         if($scope.editContact.xname){
             $scope.contacts[index].name = $scope.editContact.xname;
         }
+        if($scope.editContact.mail){
+            $scope.contacts[index].mail = $scope.editContact.mail;
+        }
         
+        if($scope.editContact.job){
+            $scope.contacts[index].job = $scope.editContact.job;
+        }
+        if($scope.editContact.image){
+            $scope.contacts[index].image = $scope.editContact.image;
+        }
         if($scope.editContact.number){
             if(!isNaN($scope.editContact.number)){
                 $scope.contacts[index].number = $scope.editContact.number;
             }
-        }
-        
-        if($scope.editContact.mail){
-            $scope.contacts[index].mail = $scope.editContact.mail
-        }
-        
-        if($scope.editContact.job){
-            $scope.contacts[index].job = $scope.editContact.job
         }
         $location.path("/home");
     };
